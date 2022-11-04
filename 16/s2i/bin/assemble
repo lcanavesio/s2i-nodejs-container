@@ -81,7 +81,13 @@ fi
 if [ "$NODE_ENV" != "production" ]; then
 
 	echo "---> Building your Node application from source"
-	npm install
+	if [ "$NPM_MODE" == "legacy-peer-deps" ]; then
+	echo "---> Installing all dependencies (including peer dependencies) with legacy-peer-deps"
+		npm install --legacy-peer-deps
+	else
+	echo "---> Installing all dependencies"
+		npm install
+	fi
 
 else
 
